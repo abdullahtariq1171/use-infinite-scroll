@@ -1,6 +1,6 @@
 {
   "name": "use-infinite-scroll",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A react hook to use infinite scroll",
   "author": "abdullahtariq1171",
   "license": "MIT",
