@@ -8,21 +8,45 @@
 
 ```bash
 npm install --save use-infinite-scroll
+yarn add use-infinite-scroll
 ```
+
+## Demo
+
+https://y2507wpz01.codesandbox.io/
 
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
-
-import { useMyHook } from 'use-infinite-scroll'
+import React, { useState, useEffect } from 'react'
+import useInfiniteScroll from 'use-infinite-scroll'
 
 const Example = () => {
-  const example = useMyHook()
+  // Note: If you don't set initial value for items, use useEffect(fetchData, [])
+  // to load data initially
+  const [ items, setItems ] = useState(Array.from(Array(30).keys(), n => n + 1));
+  const [isFetching, setIsFetching] = useInfiniteScroll(fetchData)
+
+  // replace this with your own data fetch function
+  function fetchData() {
+    setTimeout(() => {
+      setItems(prevItems =>
+        ([...prevItems, ...Array.from(Array(20).keys(), n => n + prevItems.length + 1)])
+      );
+      setIsFetching(false);
+    }, 2000);
+  }
+
   return (
-    <div>{example}</div>
+    <div>
+      <ul>
+        {items.map(item => <li key={item}>{item}</li>)}
+      </ul>
+      {isFetching ? 'Fetching...' : 'Not Fetching'}
+    </div>
   )
 }
+// see this code live at https://y2507wpz01.codesandbox.io/
 ```
 
 ## License
@@ -31,4 +55,4 @@ MIT © [abdullahtariq1171](https://github.com/abdullahtariq1171)
 
 ---
 
-This hook is created using [create-react-hook](https://github.com/hermanya/create-react-hook).
+created using [create-react-hook](https://github.com/hermanya/create-react-hook).
