@@ -1,7 +1,7 @@
-import { useMyHook } from './'
+import useInfiniteScroll from './'
 
-describe('useMyHook', () => {
+describe('useInfiniteScroll', () => {
   it('is truthy', () => {
-    expect(useMyHook).toBeTruthy()
+    expect(useInfiniteScroll).toBeTruthy()
   })
 })
