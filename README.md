@@ -22,8 +22,9 @@ import React, { useState, useEffect } from 'react'
 import useInfiniteScroll from 'use-infinite-scroll'
 
 const Example = () => {
-  // Note: If you don't set initial value for items, use useEffect(fetchData, [])
-  // to load data initially
+  // Note: If you don't set initial value for items,
+  // use useEffect(fetchData, []) to load data initially,
+  // see example/src/App.js for usecase
   const [ items, setItems ] = useState(Array.from(Array(30).keys(), n => n + 1));
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchData)
 

@@ -6,6 +6,7 @@ const App = () => {
   const [ users, setUsers ] = useState([])
   const [isFetching, setIsFetching] = useInfiniteScroll(loadUsers)
 
+  // Loads some users on initial load
   useEffect(loadUsers, [])
 
   function loadUsers() {
