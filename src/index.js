@@ -1,21 +1,26 @@
-import * as React from 'react'
+import { useState, useEffect } from 'react';
 
-export const useMyHook = () => {
-  let [{
-    counter
-  }, setState] = React.useState({
-    counter: 0
-  })
+const useInfiniteScroll = (fetchCallback) => {
+  const [isFetching, setIsFetching] = useState(false);
 
-  React.useEffect(() => {
-    let interval = window.setInterval(() => {
-      counter++
-      setState({counter})
-    }, 1000)
-    return () => {
-      window.clearInterval(interval)
-    }
-  }, [])
+  useEffect(() => {
+    if (!isFetching) return;
+    fetchCallback();
+  }, [isFetching]);
 
-  return counter
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  function handleScroll() {
+    if (isFetching ||window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight)
+      return;
+
+    setIsFetching(true);
+  }
+
+  return [isFetching, setIsFetching];
 }
+
+export default useInfiniteScroll;
